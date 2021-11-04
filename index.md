@@ -2,7 +2,9 @@
 <html>
 
 <head>
-<script src="javascript.js"> </script>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script src="vis.js"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
@@ -39,5 +41,11 @@ h1.solid {border-style: "solid";}
 <br> and then I can change to a different page with a better style that has more colors and isn't just white and black to show how white and black is boring and color is better.
 <br> that sheet would have like different sizes and better fonts </p>
 
-<svg width="1000" height = "1000"></svg>
+<div class = "dateSlide">
+<p>Date Slider:</p>
+<input id="dateslide" type="range" min="0" max="2726" value="100">
+<p> Date: <span id="date"></span></p>
+</div>
+
+<svg id ='viz1' width="1000" height = "1000"></svg>
 </body>
