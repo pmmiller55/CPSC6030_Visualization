@@ -1,0 +1,17 @@
+key to numbers:
+    0 = generator node
+    1 = mcss.ma8240
+    2 = mcss.mb8240
+    3 = waf7a
+    4 = waf1a
+    5 = eaf8a
+    6 = eaf5b
+    7 = eaf1b
+    8 = wbf3b
+    9 = wbf10a
+    10 = ewt
+    11 = ebf2b_751
+    12 = ebf4b
+    13 = ebf6b
+    14 = ebf8b
+    15 = ebf10b_751
