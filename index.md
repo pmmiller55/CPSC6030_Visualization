@@ -3,8 +3,8 @@
 
 <head>
 
-<script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="https://github.com/pmmiller55/CPSC6030_Visualization/edit/main/vis.js" type="text/javascript"></script>
+<script src="https://d3js.org/d3.v7.min.js" type="text/javascript"></script>
+<script src="vis.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
