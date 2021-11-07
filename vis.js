@@ -6,7 +6,7 @@ d3.json("A.json").then(function(A) {
 			d3.csv("timekVA.csv").then(function(timekVA) {
 				d3.json("kW.json").then(function(kW) { 
 					d3.csv("timekW.csv").then(function(timekW) {
-						d3.json("links.json").then(function(links) {
+						d3.json("Links.json").then(function(links) {
 		 
 
 
