@@ -4,7 +4,7 @@
 <head>
 
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script src="vis.js"></script>
+<script src="vis.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
