@@ -1,3 +1,4 @@
+console.log("Hello")
 //Load in the datasets
 d3.json("A.json").then(function(A) { 
 	d3.csv("timeA.csv").then(function(timeA) { 
