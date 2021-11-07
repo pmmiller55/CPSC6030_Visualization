@@ -1,42 +1,74 @@
 //Load in the datasets
-d3.json("A.json").then(function(A) { //load in each dataset on after the other so they all function in one
-	d3.csv("timeA.csv").then(function(time) { //also load in each time file. The time files will be used to access the index values so the times match between datasets
+d3.json("A.json").then(function(A) { 
+	d3.csv("timeA.csv").then(function(timeA) { 
+ 		d3.json("kVA.json").then(function(kVA) { 
+			d3.csv("timekVA.csv").then(function(timekVA) {
+				d3.json("kW.json").then(function(kW) { 
+					d3.csv("timekW.csv").then(function(timekW) {
+						d3.json("links.json").then(function(links) {
+		 
 
 
 //Set the size and select the svg.
-	var width = 500
-	var height= 500	
-	var svg =  d3.select("#viz1")
-		.style("width", width)
-		.style("height", height)
-	
-	var link = [{ "source":  0,  "target":  1} ,  {"source":  0,  "target":  2}]	
+var width = 1000
+var height= 1000	
+var svg =  d3.select("#viz1")
+	.style("width", width)
+	.style("height", height)
 
-	var time = Array.from(time)
-	console.log(time[0])
+//set the variables
+var link = Array.from(links)	
+
+var timA = Array.from(timeA)
+var timkVA = Array.from(timekVA)
+var timkW = Array.from(timekW)
+
+function getreading (d, i, j) {
+	var reading = d[i].reading[j]
+	console.log(reading)
+}
+
 
 //This section controls the slider on the page. This will allow us to slide trough the dates and ideally this will update the visualization as you slide.
 	var slider = document.getElementById("dateslide")
  	var output = document.getElementById("date")
-	output.innerHTML = JSON.stringify(time[slider.value])
+	output.innerHTML = JSON.stringify(timA[slider.value])
 
 //currently these functions work to pull the value from the slider.
 	slider.oninput = function() {
 		var current = this.value
-		let datee = JSON.stringify(time[current])
+		let datee = JSON.stringify(timA[current])
+		updateforces()
+		ticked()
 		
 	output.innerHTML = datee
 
 	}
 	
+
+	
     var layout = d3.forceSimulation(A)
 		.force('center', d3.forceCenter(width / 2 , height / 2))
 		.force('collisions', d3.forceCollide(10))
 		.force('many', d3.forceManyBody())
-		.force('link', d3.forceLink(link).distance(50))
+		.force('link', d3.forceLink(link).distance(function (d) {
+			var read = A[d.target.index].reading[slider.value]
+			console.log(read)
+			if (read == 'NA' || read ==0) {return 1}
+			return read
+		}))
 		.on('tick', ticked) 
+	
+	function updateforces() {
+		layout.force('link').distance(function (d) {
+			var read = A[d.target.index].reading[slider.value]
+			console.log(read)
+			if (read == 'NA') {return 1}
+			return read
+		})
+	}
 	 
-//   var color =  d3.scaleLinear().domain(nodes).range(red, blue, green, black) //TODO: create a color scale to map on the groups of the graph nodes
+    var color =  d3.scaleLinear().domain(A.nodes).range(red, blue, green, black) //TODO: create a color scale to map on the groups of the graph nodes
     
      var edges = svg.append("g")
                   .selectAll("line")
@@ -60,7 +92,7 @@ d3.json("A.json").then(function(A) { //load in each dataset on after the other s
 					  
 				  })  */
 			//  .attr("fill", function (d, group) {return color(group)} ) //TODO: set the appropriate color for each node depending on its group
-				.attr("r", 7)
+				.attr("r", 20)
 		
     function ticked(){
       node
@@ -73,6 +105,11 @@ d3.json("A.json").then(function(A) { //load in each dataset on after the other s
         .attr("x2", d => d.target.x)
         .attr("y2", d => d.target.y)
 		}
-		
+				
+ 						})
+					})
+				})
+			}) 
+		}) 
 	})
 }) 
