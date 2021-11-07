@@ -50,9 +50,6 @@ h2 {font-weight: 200 ;
 <svg width ="400" height="400"></svg>
 
 <h2> <strong>Improved Visualization</strong></h2>
-<p> <i> Click to "Make It Better" </i> </p>
-
-<button id="boring" onclick="swap();"> Make It Better </button>
 
 <p>
     <br>
