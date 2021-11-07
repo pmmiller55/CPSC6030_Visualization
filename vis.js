@@ -68,7 +68,7 @@ function getreading (d, i, j) {
 		})
 	}
 	 
-    var color =  d3.scaleLinear().domain(A.nodes).range(red, blue, green, black) //TODO: create a color scale to map on the groups of the graph nodes
+//    var color =  d3.scaleLinear().domain(A.nodes).range(red, blue, green, black) //TODO: create a color scale to map on the groups of the graph nodes
     
      var edges = svg.append("g")
                   .selectAll("line")
