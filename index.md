@@ -32,22 +32,21 @@ h2 {font-weight: 200 ;
 <p2> <strong> "A Novel Visualization Technique for Electric Power Grid Analytics" </strong> </p2>
 
 <h2> <strong> Current State </strong> </h2>
-<p style="font-family: Arial"> Current technical drawings show great detail for allowing engineers to wire 
-<br> circuits correctly but the visualization techniques recommended in this paper will 
-<br> allow for proper data comparisons and highlight trends or anomilies in power grid design or real world application. 
-<br>
-<br> The current use of powergrid analytics is difficult to read because it is all uniform size.
-<br> This is fair when looking at small, non-complex grids.
-</p>
+<p> Current technical drawings are arranged to allow electrical engineers to wire circuits correctly. <br> They are static which has certain utilities, but does not allow for quick assessment of trends or anomalies that may be occuring in circuits over time. 
+<br> When an electrical engineer is trying to solve problems they use schematics that look like this: </p>
 
 <img align: "left">
-
-
-<p style="font-family: Arial"> However, looking at a large grid id difficult to read
+    
+<p> The large grid includes all the information you may want when designing and implementing a power grid, but none of the real world usage data that is collected over time.
 <br> If we wanted to identify where the highest voltage or wattage 
-<br> is being pulled, you cant identify that information quickly. </i> </p>
+<br> is being pulled, you cant identify that information quickly. </p>
 
-<svg width ="400" height="400"></svg>
+<br>Our paper discusses visualization techniques that allow for proper data comparison that highlights trends and anomilies in power grid design for real world application. 
+<br> In current real world application, the nodes are arranged geographically, which means the links are static and provide no information. 
+<br>Modeling our visualization off the techniques used in the paper, the links are changing length based on current. The higher the current, the longer the link will be. 
+<br> To emphasize the relationships between the nodes (and for the purposes of testing the code while writing it), the link length, colors, and node size all represent the current between the nodes. 
+<br> Other value options are kW and kVA which are derived from the current and voltage. Utilizing these values together in a node graph allows us to answer more electrical engineering questions. 
+</p>
 
 <h2> <strong>Improved Visualization</strong></h2>
 
