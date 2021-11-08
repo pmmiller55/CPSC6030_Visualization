@@ -35,7 +35,8 @@ h2 {font-weight: 200 ;
 <p> Current technical drawings are arranged to allow electrical engineers to wire circuits correctly. <br> They are static which has certain utilities, but does not allow for quick assessment of trends or anomalies that may be occuring in circuits over time. 
 <br> When an electrical engineer is trying to solve problems they use schematics that look like this: </p>
 
-<img align: "left">
+<img src="Clemson_Local_Grid.JPG" alt="Current State Local Grid"
+        width="500" height="400" align: "left">
     
 <p> The large grid includes all the information you may want when designing and implementing a power grid, but none of the real world usage data that is collected over time.
 <br> If we wanted to identify where the highest voltage or wattage 
@@ -63,4 +64,12 @@ h2 {font-weight: 200 ;
 </div>
 
 <svg id ='viz1' width="1000" height = "1000"></svg>
+
+<br>
+<br>
+<br>
+<br>
+<p> <i> Citation: P. C. Wong et al., "A Novel Visualization Technique for Electric Power Grid Analytics," 
+    <br>in IEEE Transactions on Visualization and Computer Graphics, vol. 15, no. 3, pp. 410-423, 
+    <br> May-June 2009, doi: 10.1109/TVCG.2008.197. </i> </p>
 </body>
