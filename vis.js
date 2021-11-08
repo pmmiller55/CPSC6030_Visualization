@@ -96,6 +96,17 @@ function updateforces() {
 					var val = d.reading[slider.value] //to change what dataset this value is pulling from, change the .data attribute a few lines above
 				if (val == 0) {return 'black'} })
 				.attr('fill-opacity', 0.5)
+
+	var text = svg.append("g")
+				.attr("class", "labels")
+				.selectAll("text")
+				.data(A)
+				.enter().append("text")
+				.attr("x", 90)
+				.attr("y", 600)
+				.attr("dy", ".35em")
+				.attr("dx", 12)
+   				.text("work in progess but: " + A[0].node)
 		
     function ticked(){
       node
