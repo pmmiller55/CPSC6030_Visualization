@@ -18,7 +18,9 @@ h1 {text-align: center;
 h1.solid {border-style: "solid";}
 h2 {font-weight: 200 ;
     color:red;}
-
+input[type=range] {
+  width: 50%;
+}
 </style>
 
 
@@ -57,14 +59,14 @@ h2 {font-weight: 200 ;
     <br>
 </p>
 
+<svg id ='viz1' width="500" height = "500"></svg>
+
+
 <div class = "dateSlide">
 <p>Date Slider:</p>
 <input id="dateslide" type="range" min="0" max="2726" value="100">
 <p> Date: <span id="date"></span></p>
 </div>
-
-<svg id ='viz1' width="1000" height = "1000"></svg>
-
 <br>
 <br>
 <br>
