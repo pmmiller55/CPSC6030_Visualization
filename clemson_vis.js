@@ -1,10 +1,10 @@
 console.log("Hello")
 //Load in the datasets
-d3.json("A.json").then(function(A) { 
+d3.json("clemson_A.json").then(function(A) { 
 	d3.csv("timeA.csv").then(function(timeA) { 
- 		d3.json("kVA.json").then(function(kVA) { 
+ 		d3.json("clemson_kVA.json").then(function(kVA) { 
 			d3.csv("timekVA.csv").then(function(timekVA) {
-				d3.json("kW.json").then(function(kW) { 
+				d3.json("clemson_kW.json").then(function(kW) { 
 					d3.csv("timekW.csv").then(function(timekW) {
 						d3.json("Links.json").then(function(links) {
 		 
