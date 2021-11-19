@@ -13,7 +13,7 @@ d3.json("clemson_A.json").then(function(A) {
 //Set the size and select the svg.
 var width = 1000
 var height= 1000	
-var svg =  d3.select("#viz1")
+var svg =  d3.select("#clemson_viz")
 	.style("width", width)
 	.style("height", height)
 
