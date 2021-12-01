@@ -1,4 +1,4 @@
-console.log("Hello")
+
 //Load in the datasets
 d3.json("clemson_A.json").then(function(A) { 
 	d3.csv("timeA.csv").then(function(timeA) { 
@@ -11,8 +11,8 @@ d3.json("clemson_A.json").then(function(A) {
 
 
 //Set the size and select the svg.
-var width = 1000
-var height= 1000	
+var width = 750
+var height= 750
 var svg =  d3.select("#clemson_viz")
 	.style("width", width)
 	.style("height", height)
@@ -24,6 +24,12 @@ var timA = Array.from(timeA)
 var timkVA = Array.from(timekVA)
 var timkW = Array.from(timekW)
 
+var A_data = A
+var kW_data = kW
+var kVA_data = kVA
+
+var cSelected = A_data
+
 //This section controls the slider on the page which shows the date selected.
 	var slider = document.getElementById("dateslide")
  	var output = document.getElementById("date")
@@ -33,38 +39,37 @@ var timkW = Array.from(timekW)
 	slider.oninput = function() {
 		var current = this.value
 		let datee = JSON.stringify(timA[current])
-		updateforces()
+		layout.force("collisions").radius(function(cSelected) {
+			var read = cSelected.reading[current]
+			if(read == "NA") {return 1}
+			return read/50}) 
+		layout.force("link").distance(function(d) {
+			var reader = cSelected[d.target.index].reading[current]
+			if (reader == "NA") {return 1}
+			return reader/50}) 
 		ticked()
 		
 	output.innerHTML = datee
 
 	}
 	
-//this function is called when the slider is moved put code in here you want updated when the slider is moved.
-function updateforces() {
-	layout.force('link').distance(function (d) {
-			var read = A[d.target.index].reading[slider.value]
-			console.log(read)
-			if (read == 'NA' || read ==0) {return 1}
-			return read
-		})
-}
 	
 //Forces
-    var layout = d3.forceSimulation(A)
+    var layout = d3.forceSimulation(cSelected)
 		.force('center', d3.forceCenter(width / 2 , height / 2))
-		.force('collisions', d3.forceCollide(10))
+		.force('collisions', d3.forceCollide(function(cSelected) {
+			var read = cSelected.reading[slider.value]
+			if(read == "NA") {return 1}
+			return read/50}))
 		.force('many', d3.forceManyBody())
-		.force('link', d3.forceLink(link).distance(function (d) {
-			var read = A[d.target.index].reading[slider.value]
-			console.log(read)
-			if (read == 'NA' || read ==0) {return 1}
-			return read
-		}))
-		.on('tick', ticked) 
+		.force('link', d3.forceLink(link).distance(function(d) {
+			read = cSelected[d.target.index].reading[slider.value]
+			if (read == "NA") {return 1}
+			return read/50})) 
+		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 
-   var color =  d3.scaleLinear().domain([1,50, 100, 200]).range(['red', 'blue', 'green', 'orange']) 
+ //  var color =  d3.scaleLinear().domain([1,50, 100, 200]).range(['red', 'blue', 'green', 'orange']) 
    
 //Print the visualization 
      var edges = svg.append("g")
@@ -72,71 +77,42 @@ function updateforces() {
                   .data(link)
                   .enter()
                   .append("line")
-                  .attr("stroke", function(d) {
-					var val = A[d.target.index].reading[slider.value]					//to change what dataset this value is pulling from, change the .data attribute a few lines above
-						if (val == 'NA') {return "#ccc"}
-				return color(val)})
+                  .attr("stroke", "black")
                   .attr("stroke-width", 1) 
      
     var node = svg.append("g")
                 .selectAll("circle")
-                .data(A)
+                .data(cSelected)
                 .enter()
                 .append("circle") 
-			    .attr("fill", function(d) {
-					var val = d.reading[slider.value]					//to change what dataset this value is pulling from, change the .data attribute a few lines above
-						if (val == 'NA') {return "#ccc"}
-				return color(val)})
-				.attr("r", function(d) {
-					var val = d.reading[slider.value] //to change what dataset this value is pulling from, change the .data attribute a few lines above
-					if (val == 0) {return 10}
-					if (val == 'NA') {return 3}
-				return val/5})
-				.style('stroke', function(d) {
-					var val = d.reading[slider.value] //to change what dataset this value is pulling from, change the .data attribute a few lines above
-				if (val == 0) {return 'black'} })
-				.attr('fill-opacity', 0.5)
+			    .attr("fill", "red")
+				.attr("r", 5)
+			//	.attr('fill-opacity', 0.5)
 
 	var text = svg.append("g")
 				.attr("class", "labels")
 				.selectAll("text")
-				.data(A)
+				.data(cSelected)
 				.enter().append("text")
 				.attr("x", 90)
 				.attr("y", 600)
 				.attr("dy", ".35em")
 				.attr("dx", 12)
-   				.text("work in progess but: " + A[0].node)
+   				.text("work in progess but: " + cSelected[0].node)
 		
     function ticked(){
       node
 	    .attr('cx', d => d.x)
-        .attr('cy', d => d.y)
-			    .attr("fill", function(d) {
-					var val = d.reading[slider.value]					//to change what dataset this value is pulling from, change the .data attribute a few lines above
-						if (val == 'NA') {return "#ccc"}
-				return color(val)})
-				.attr("r", function(d) {
-					var val = d.reading[slider.value] //to change what dataset this value is pulling from, change the .data attribute a few lines above
-					if (val == 0) {return 3}
-					if (val == 'NA') {return 3}
-				return val/5})
-				.style('stroke', function(d) {
-					var val = d.reading[slider.value] //to change what dataset this value is pulling from, change the .data attribute a few lines above
-				if (val == 0) {return 'black'} })		
+        .attr('cy', d => d.y)	
       
       edges
         .attr("x1", d => d.source.x)
         .attr("y1", d => d.source.y)
         .attr("x2", d => d.target.x)
         .attr("y2", d => d.target.y)
-		.attr("stroke", function(d) {
-			var val = A[d.target.index].reading[slider.value]					//to change what dataset this value is pulling from, change the .data attribute a few lines above
-			if (val == 'NA') {return "#ccc"}
-			return color(val)})
-		}
+	}
 
-				
+		
  						})
 					})
 				})
