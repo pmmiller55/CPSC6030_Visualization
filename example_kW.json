@@ -1,0 +1,17 @@
+[
+    {"node" : "EAF1B", "reading" : ["300","300"]},
+	{"node" : "EAF5B", "reading" : ["350","345"]},
+	{"node" : "EAF8A", "reading" : ["200","200"]},
+	{"node" : "EBF10B_751", "reading" : ["300","300"]},
+	{"node" : "EBF2B_751", "reading" : [1450,450]},
+	{"node" : "EBF4B", "reading" : [36,38]},
+	{"node" : "EBF6B", "reading" : ["45","47"]},
+	{"node" : "EBF8B", "reading" : ["1000","1000"]},
+	{"node" : "EWT", "reading" : ["1000","1000"]},
+	{"node" : "WAF1A", "reading" : ["345","257"]},
+	{"node" : "WAF7A", "reading" : ["458","1006"]},
+	{"node" : "WBF10A", "reading" : ["1245","1345"]},
+	{"node" : "WBF3B", "reading" : ["1567","1200"]},
+	{"node" : "MCSS.MA8240", "reading" : ["2000","2000"]},
+	{"node" : "MCSS.MB8240.", "reading" : ["1800","1900"]}
+]

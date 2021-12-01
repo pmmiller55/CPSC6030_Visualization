@@ -5,15 +5,16 @@
 
 <script src="https://d3js.org/d3.v7.min.js" type="text/javascript"></script>
 <script src="clemson_vis.js" type="text/javascript"></script>
+<script src="example_viz.js" type="text/javascript"></script>
+<!-- <script src="simulated.js" type="text/javascript"></script> -->
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
 </head>
 
 <style>
-body,h1,h2,h3,h4,h5,button {font-family: "Raleway", sans-serif} 
+body,h1,h2,h3,h4,h5,button,p {font-family: "Raleway", sans-serif} 
 h1 {text-align: center;
-    font-family: "Arial", sans-serif;
     color: black}
 h1.solid {border-style: "solid";}
 h2 {font-weight: 200 ;
@@ -23,26 +24,116 @@ input[type=range] {
 }
 </style>
 
-
-
 <body style="background-color: beige;">
 
 
-<h1 class= "solid">A Novel Visualization Technique for Electrical Power Grid Analytics <br> and <br> How to be an Electrical Engineer in 5 Easy Steps </h1>
+<h1 class= "solid">A Novel Visualization Technique for Electrical Power Grid Analytics </h1>
 
 <br>
-<p>  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
+<h1> Background </h1>
+<p> Being able to monitor trends and anomalies in the power grid is important because so many other aspects of society depend upon it. 
+So, the vulnerability of the power grid is a major area of study. This has brought about the need for novel visualizations to better monitor the power grid. 
+Our chosen research paper, "A Novel Visualization for Electric Power Grid Analytics" addresses this need.  </p>
+
+<br>
+
+<h1>Current Visualizations</h1>
+<h2>One Line Diagram</h2>
+<br>
+<p>Current technical drawings are arranged to allow electrical engineers to wire circuits correctly. 
+They are static which has certain utilities, but does not allow for quick assessment of trends or anomalies that may be occuring in circuits over time.  
+<br>
+<br>The large grid includes all the information you may want when designing and implementing a power grid, but none of the real world usage data that is collected over time.
+<br>
+<br>
+<br>
+<img class="zoom" src="Clemson_Local_Grid.JPG" alt="Current State Local Grid" width="50%" height="50%" align: "center"> 
+<br>This diagram is an example one line diagram from a switching station at Clemson University.
+</p>
+
+<br>
+<h2> Simulations </h2>
+<p> PowerWorld's Simulator is a tool currently used to address the need for power grid analytics. It uses alot of colors, symbols, and geographic location to get information across.
+<br>Below are examples of their interactive one line diagrams.
+<br>
+<img src="BusView1.JPG" alt="2" width="20%" height="20%"> 
+<img src="TrainerWideArea.JPG" alt="7" width="20%" height="20%"> 
+<img src="OPFreserves.JPG" alt="6" width="20%" height="20%"> 
+<br>
+<br>
+However, there are over 50,000 buses in North American power grids. When you want to analyze on a large scale, visualizations like these can be extremely computationally expensive.
+<br>Below are some examples of the interactive visualizations for large geographic areas.
+<br>
+<br>
+<img src="05hs2a.JPG" alt="1" width="20%" height="20%"> 
+<img src="EHVEmphasis.JPG" alt="3" width="20%" height="20%"> 
+<img src="mdwst.JPG" alt="4" width="20%" height="20%"> 
+<img src="OPFContour.JPG" alt="5" width="20%" height="20%"> 
+<br>
+So, the researches for our paper were looking for less computationally expensive visulations that add some analytical power, and they settled on weighted graphs. 
+</p>
+
+<br>
+<h1> Weighted Graph Visualizations </h1>
+<p>The research explains that by using a node graph users can still position the nodes relative to eachother as they would be geographically without constricting the nodes to locations on the map.
+<br>Doing so introduces the novel part of their visualization: weighted links and nodes. In the ideal scenario for the researches, the user could add in symbols and icons based on their needs, and when utilizing even larger datasets the 
+node graph can summarize nodes and remove links to simplify the visualization which is often times more useful. 
+<br>
+<br>For our purposes we are focusing on the novel use of weighted links and nodes. The visualization they propose utilizes a force directed layout. We can represent values with the forces on the links, and different values with the forces on the nodes.
+<br>Example link weighting factors include: "resistance, reactance, impedance, real power flow, reactive power flow, real losses, reactive losses, and so forth."[1]
+<br> Example node wieghting factors include: "voltage magnitude, voltage angle, real power injection, reactive power injection, real load, reactive load, and so forth."[1]
+<br>
+<br>
+
+<br>One of our members is an Electrical Engineer working on Clemson University's grid so out data includes Watts, Amperes, and Volt-Amperes recorded on our local buses. 
+
+<br>
+<br>
+<div align="center" ><b> For Reference: Electrical Terms Simplified </b> </div>
+<br>
+<b>Power Grid:</b> A network of power generators which distribute power/electricity to users. <br>
+<b>Bus:</b> Places in the system where network components like generators and feeders connect.<br>
+<br>
+<b>Watt (W):</b> The amount of power/electricity consumed. A higher watt value will indicate more power being used.<br>
+<b>Ampere (A):</b> The intensity of an electrical current. If it were water it would be the amount of water flowing.<br>
+<b>Volts (V):</b> Difference of potential that drives the current against the resistance. If it were water, it would be the water pressure.<br>
+<b>Volt-Ampere (VA):</b> V * A, represents <u>apparent power</u>. In contrast, Watts are <u>real power.</u><br>
+
+<b>In the real world these values are measured/recorded at the busses which are shown as the red dots in the visualization with the links being the transmission lines in the power grid.</b>
+<br>
+<br><img src="figures.JPEG" alt="6" width="50%" height="50%"> 
+<br>
+<br>Figure A shows link weighting applied to the link connecting the clusters. Figure B shows node weighting applied to the clusters. Figure C shows both. Notice how the combination of the weights shows areas of obvious contrast. 
+</p>
+
+<h2>Watts</h2>
+<p>Our data contains readings from busses for watts (real power), volt-amperes (apparent power), and amperes. In this example the links and nodes are weighted by watts. When the watt reading is higher the nodes will be more spread out.
+<br>When the reading is lower, the nodes will be closer. You can identify which nodes are pulling more power. Hover over the node to see information associated with it. 
+<br>
+</p>
+<svg id ='example_viz'></svg>
+
+<br>
+
+
+<!-- <p>  &emsp; &emsp; &emsp; &emsp; &emsp; &emsp;
 <iframe align='center' src="explain1.html" height="600" width="1500" title="How to be an Electrical Engineer"></iframe> 
-</p>
-<h2> <strong>Improved Visualization</strong></h2>
+</p> -->
+<h1>Final Visualizations</h1>
+<h2> Simulated Visualization</h2>
+<p>Clemson's busses make a circular network and turns out to be very small which doesn't display the full usability of the visualization. Below is simulated data and nodes based off the clemson network.
+<br>
+<svg id ='simulated'></svg>
 
-<p>
-    <br>
-    <br>
-    <br>
-</p>
+<div class = "dateSlide">
+<p>Date Slider:</p>
+<input id="sim_dateslide" type="range" min="0" max="2726" value="100">
+<p> Date: <span id="sim_date"></span></p>
+</div>
 
-<svg id ='clemson_viz' width="500" height = "500"></svg>
+<h2> Clemson's Visualization</h2>
+
+<svg id ='clemson_viz'></svg>
 
 
 <div class = "dateSlide">

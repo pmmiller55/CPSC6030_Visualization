@@ -1,0 +1,17 @@
+[
+    {"node" : "EAF1B", "reading" : ["12","1457"]},
+	{"node" : "EAF5B", "reading" : ["350","345"]},
+	{"node" : "EAF8A", "reading" : ["2300","2300"]},
+	{"node" : "EBF10B_751", "reading" : ["1240","1240"]},
+	{"node" : "EBF2B_751", "reading" : [1988,1984]},
+	{"node" : "EBF4B", "reading" : [5600,6780]},
+	{"node" : "EBF6B", "reading" : ["4567","4777"]},
+	{"node" : "EBF8B", "reading" : ["67","72"]},
+	{"node" : "EWT", "reading" : ["89","70"]},
+	{"node" : "WAF1A", "reading" : ["345","257"]},
+	{"node" : "WAF7A", "reading" : ["458","1006"]},
+	{"node" : "WBF10A", "reading" : ["1245","1345"]},
+	{"node" : "WBF3B", "reading" : ["1567","1200"]},
+	{"node" : "MCSS.MA8240", "reading" : ["1321","1780"]},
+	{"node" : "MCSS.MB8240.", "reading" : ["1800","1900"]}
+]
