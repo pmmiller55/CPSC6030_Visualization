@@ -39,19 +39,14 @@ var cSelected = A_data
 	slider.oninput = function() {
 		var current = this.value
 		let datee = JSON.stringify(timA[current])
-		console.log(current)
-		node.remove()
-		edges.remove()
-		
-		
-		layout.force("collisions").radius(current) /*function(cSelected) {
+		layout.force("collisions").radius(function(cSelected) {
 			var read = cSelected.reading[current]
 			if(read == "NA") {return 1}
-			return read/50}) */
-		layout.force("link").distance(current) /*function(d) {
+			return read/50}) 
+		layout.force("link").distance(function(d) {
 			var reader = cSelected[d.target.index].reading[current]
 			if (reader == "NA") {return 1}
-			return reader/50}) */
+			return reader/50}) 
 		ticked()
 		
 	output.innerHTML = datee
@@ -65,12 +60,12 @@ var cSelected = A_data
 		.force('collisions', d3.forceCollide(function(cSelected) {
 			var read = cSelected.reading[slider.value]
 			if(read == "NA") {return 1}
-			return +read/50}))
+			return read/50}))
 		.force('many', d3.forceManyBody())
 		.force('link', d3.forceLink(link).distance(function(d) {
 			read = cSelected[d.target.index].reading[slider.value]
 			if (read == "NA") {return 1}
-			return +read/50})) 
+			return read/50})) 
 		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 
