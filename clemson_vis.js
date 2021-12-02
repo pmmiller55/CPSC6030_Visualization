@@ -11,8 +11,8 @@ d3.json("clemson_A.json").then(function(A) {
 
 
 //Set the size and select the svg.
-var width = 750
-var height= 750
+var width = 1000
+var height= 1000
 var svg =  d3.select("#clemson_viz")
 	.style("width", width)
 	.style("height", height)
@@ -28,9 +28,8 @@ var A_data = A
 var kW_data = kW
 var kVA_data = kVA
 
-var cSelected = A_data
+var cSelected = kW_data
 
-console.log(kW)
 
 //This section controls the slider on the page which shows the date selected.
 	var slider = document.getElementById("dateslide")
@@ -45,16 +44,17 @@ console.log(kW)
 			var read = cSelected.reading[current]
 			if(read == "NA") {return 1}
 			return read/50}) 
-		layout.force("link").distance(function(d) {
+		layout.force("link") /*.distance(function(d) {
+			console.log(cSelected)
 			var reader = cSelected[d.target.index].reading[current]
 			if (reader == "NA") {return 1}
-			return reader/50}) 
+			console.log(reader)
+			return reader/50})  */
 		ticked()
 		
 	output.innerHTML = datee
 
 	}
-	console.log(link[0].target)
 	
 	
 //Forces
@@ -65,7 +65,7 @@ console.log(kW)
 			if(read == "NA") {return 1}
 			return read/50}))
 		.force('many', d3.forceManyBody())
-		/*.force('link', d3.forceLink(link).distance(function(d) {
+		.force('link', d3.forceLink(link)) /*.distance(function(d) {
 			read = cSelected[d.target].reading[slider.value]
 			if (read == "NA") {return 1}
 			return read/50})) */
@@ -96,8 +96,8 @@ console.log(kW)
 					    var text = svg
 							.append('text')
 							.attr("id", 'nodetext')
-							.attr("x", 90)
-							.attr("y", 600)
+							.attr("x", 50)
+							.attr("y", 950)
 							.attr("dx", ".35em")
 							.attr("dy", "0em")
 							.attr("font-family", "sans-serif")
@@ -105,8 +105,8 @@ console.log(kW)
 						var text2 = svg 
 							.append('text')
 							.attr("id", 'nodetext2')
-							.attr("x", 90)
-							.attr("y", 600)
+							.attr("x", 50)
+							.attr("y", 950)
 							.attr("dx", ".35em")
 							.attr("dy", "1.2em")
 							.attr("font-family", "sans-serif")
