@@ -18,7 +18,7 @@ var svg =  d3.select("#clemson_viz")
 	.style("height", height)
 
 //set the variables
-var link = Array.from(links)	
+var link = Array.from(links)
 
 var timA = Array.from(timeA)
 var timkVA = Array.from(timekVA)
@@ -29,6 +29,8 @@ var kW_data = kW
 var kVA_data = kVA
 
 var cSelected = A_data
+
+console.log(kW)
 
 //This section controls the slider on the page which shows the date selected.
 	var slider = document.getElementById("dateslide")
@@ -52,6 +54,7 @@ var cSelected = A_data
 	output.innerHTML = datee
 
 	}
+	console.log(link[0].target)
 	
 	
 //Forces
@@ -62,10 +65,10 @@ var cSelected = A_data
 			if(read == "NA") {return 1}
 			return read/50}))
 		.force('many', d3.forceManyBody())
-		.force('link', d3.forceLink(link).distance(function(d) {
-			read = cSelected[d.target.index].reading[slider.value]
+		/*.force('link', d3.forceLink(link).distance(function(d) {
+			read = cSelected[d.target].reading[slider.value]
 			if (read == "NA") {return 1}
-			return read/50})) 
+			return read/50})) */
 		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 

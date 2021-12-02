@@ -44,6 +44,33 @@ var link_e = Array.from(e_links)
                 .append("circle") 
 			    .attr("fill", "red")
 				.attr("r", "5") 
+        .on('mouseover', function(d, i){
+					d3.select(this).attr("stroke", "black")
+					    var text = e_svg
+							.append('text')
+							.attr("id", 'nodetexta')
+							.attr("x", 50)
+							.attr("y", 475)
+							.attr("dx", ".35em")
+							.attr("dy", "0em")
+							.attr("font-family", "sans-serif")
+							.text("Node: " + i.node )
+              
+						var text2 = e_svg 
+							.append('text')
+							.attr("id", 'nodetextb')
+							.attr("x", 50)
+							.attr("y", 475)
+							.attr("dx", ".35em")
+							.attr("dy", "1.2em")
+							.attr("font-family", "sans-serif")
+							.text("Wattage: " + i.reading[0] + " kW")
+				})
+				.on('mouseout', function(d,i){
+					d3.select(this).attr("stroke","none")
+					d3.select("#nodetexta").remove()
+					d3.select("#nodetextb").remove()
+				})
 	
 
     function ticked(){
