@@ -52,14 +52,14 @@ var simSelected = s_A
     var layout = d3.forceSimulation(simSelected)
 		.force('center', d3.forceCenter(width / 2 , height / 2))
 		.force('collisions', d3.forceCollide(function(simSelected) {
-			var read = simSelected.reading[slider.value]
+			var read = simSelected.reading[sim_slider.value]
 			if(read == "NA") {return 1}
 			return +read/50}))
 		.force('many', d3.forceManyBody())
-		.force('link', d3.forceLink(link).distance(function(d) {
-			read = simSelected[d.target.index].reading[slider.value]
+		.force('link', d3.forceLink(slink).distance(function(d) {
+			read = simSelected[d.target.index].reading[sim_slider.value]
 			if (read == "NA") {return 1}
-			return +read/50})) 
+			return read/50})) 
 		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 
@@ -68,7 +68,7 @@ var simSelected = s_A
 //Print the visualization 
      var edges = svg.append("g")
                   .selectAll("line")
-                  .data(link)
+                  .data(slink)
                   .enter()
                   .append("line")
                   .attr("stroke", "black")
@@ -82,17 +82,32 @@ var simSelected = s_A
 			    .attr("fill", "red")
 				.attr("r", 5)
 			//	.attr('fill-opacity', 0.5)
-
-	var text = svg.append("g")
-				.attr("class", "labels")
-				.selectAll("text")
-				.data(simSelected)
-				.enter().append("text")
-				.attr("x", 90)
-				.attr("y", 600)
-				.attr("dy", ".35em")
-				.attr("dx", 12)
-   				.text("work in progess but: " + simSelected[0].node)
+				.on('mouseover', function(d, i){
+					d3.select(this).attr("stroke", "black")
+					    var text = svg
+							.append('text')
+							.attr("id", 'nodetexta')
+							.attr("x", 90)
+							.attr("y", 600)
+							.attr("dx", ".35em")
+							.attr("dy", "0em")
+							.attr("font-family", "sans-serif")
+							.text("Node: " + i.node )
+						var text2 = svg 
+							.append('text')
+							.attr("id", 'nodetextb')
+							.attr("x", 90)
+							.attr("y", 600)
+							.attr("dx", ".35em")
+							.attr("dy", "1.2em")
+							.attr("font-family", "sans-serif")
+							.text("Reading: " + i.reading[sim_slider.value])
+				})
+				.on('mouseout', function(d,i){
+					d3.select(this).attr("stroke","none")
+					d3.select("#nodetexta").remove()
+					d3.select("#nodetextb").remove()
+				})
 		
     function ticked(){
       node

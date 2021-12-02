@@ -6,6 +6,7 @@
 <script src="https://d3js.org/d3.v7.min.js" type="text/javascript"></script>
 <script src="clemson_vis.js" type="text/javascript"></script>
 <script src="example_viz.js" type="text/javascript"></script>
+<script src="script.js" type="text/javascript"></script>
 <!-- <script src="simulated.js" type="text/javascript"></script> -->
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -123,7 +124,15 @@ node graph can summarize nodes and remove links to simplify the visualization wh
 <h2> Simulated Visualization</h2>
 <p>Clemson's busses make a circular network and turns out to be very small which doesn't display the full usability of the visualization. Below is simulated data and nodes based off the clemson network.
 <br>
+<label for="select_sim"> Choose a Measure:</label>
+<select name="select_sim" id="select_sim">
+<option value="skW_data">Watts (kW)</option>
+<option value="skVA_data">Volt-amperes (kVA)</option>
+<option value="sA_data">Amperes (A)</option>
+</select>
+
 <svg id ='simulated'></svg>
+
 
 <div class = "dateSlide">
 <p>Date Slider:</p>
@@ -132,15 +141,22 @@ node graph can summarize nodes and remove links to simplify the visualization wh
 </div>
 
 <h2> Clemson's Visualization</h2>
-
+<label for="select_clem"> Choose a Measure:</label>
+<select name="select_clem" id="select_clem">
+<option value="kW_data">Watts (kW)</option>
+<option value="kVA_data">Volt-amperes (kVA)</option>
+<option value="A_data">Amperes (A)</option>
+</select>
+<br>
 <svg id ='clemson_viz'></svg>
-
-
+<br>
 <div class = "dateSlide">
 <p>Date Slider:</p>
 <input id="dateslide" type="range" min="0" max="2726" value="100">
 <p> Date: <span id="date"></span></p>
 </div>
+<!-- <iframe id="clem_i" src="script.html" height="100%" width="100%"></iframe> -->
+
 <br>
 <br>
 <br>

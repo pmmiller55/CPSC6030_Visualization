@@ -88,17 +88,33 @@ var cSelected = A_data
 			    .attr("fill", "red")
 				.attr("r", 5)
 			//	.attr('fill-opacity', 0.5)
-
-	var text = svg.append("g")
-				.attr("class", "labels")
-				.selectAll("text")
-				.data(cSelected)
-				.enter().append("text")
-				.attr("x", 90)
-				.attr("y", 600)
-				.attr("dy", ".35em")
-				.attr("dx", 12)
-   				.text("work in progess but: " + cSelected[0].node)
+				.on('mouseover', function(d, i){
+					d3.select(this).attr("stroke", "black")
+					    var text = svg
+							.append('text')
+							.attr("id", 'nodetext')
+							.attr("x", 90)
+							.attr("y", 600)
+							.attr("dx", ".35em")
+							.attr("dy", "0em")
+							.attr("font-family", "sans-serif")
+							.text("Node: " + i.node )
+						var text2 = svg 
+							.append('text')
+							.attr("id", 'nodetext2')
+							.attr("x", 90)
+							.attr("y", 600)
+							.attr("dx", ".35em")
+							.attr("dy", "1.2em")
+							.attr("font-family", "sans-serif")
+							.text("Reading: " + i.reading[slider.value])
+				})
+				.on('mouseout', function(d,i){
+					d3.select(this).attr("stroke","none")
+					d3.select("#nodetext").remove()
+					d3.select("#nodetext2").remove()
+				})
+				
 		
     function ticked(){
       node
