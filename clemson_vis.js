@@ -6,7 +6,7 @@ d3.json("clemson_A.json").then(function(A) {
 			d3.csv("timekVA.csv").then(function(timekVA) {
 				d3.json("clemson_kW.json").then(function(kW) { 
 					d3.csv("timekW.csv").then(function(timekW) {
-						d3.json("Links.json").then(function(links) {
+						d3.json("clemson_links.json").then(function(links) {
 		 
 
 
@@ -44,12 +44,10 @@ var cSelected = kW_data
 			var read = cSelected.reading[current]
 			if(read == "NA") {return 1}
 			return read/50}) 
-		layout.force("link") /*.distance(function(d) {
-			console.log(cSelected)
+		layout.force("link").distance(function(d) {
 			var reader = cSelected[d.target.index].reading[current]
 			if (reader == "NA") {return 1}
-			console.log(reader)
-			return reader/50})  */
+			return reader/50})  
 		ticked()
 		
 	output.innerHTML = datee
