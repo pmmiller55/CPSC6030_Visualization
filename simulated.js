@@ -1,3 +1,9 @@
+//run sim makes it so that you select a measurement and then can delete everything and refresh the simulation when you switch measurments you want to visualize
+
+runsim()
+
+function runsim(){
+
 //Load in the datasets
 d3.json("simulated_A.json").then(function(s_A) { 
  	d3.json("simulated_kVA.json").then(function(s_kVA) { 
@@ -6,8 +12,8 @@ d3.json("simulated_A.json").then(function(s_A) {
 				d3.json("simulated_links.json").then(function(s_links) {
 
 //Set the size and select the svg.
-var width = 1000
-var height= 1000	
+var width = 750
+var height= 750	
 var sim_svg =  d3.select("#simulated")
 	.style("width", width)
 	.style("height", height)
@@ -21,7 +27,32 @@ var sA_data = s_A
 var skVA_data = s_kVA
 var skW_data = s_kW
 
-var simSelected = s_A
+
+var simSelected = readdrop()
+
+function readdrop(){
+	var get = document.getElementById("select_sim").value
+	if (get == "sA_data") {var simSelected1 = s_A}
+	if (get == "skVA_data") {var simSelected1 = s_kVA}
+	if (get == "skW_data") {var simSelected1 = s_kW}
+	return simSelected1
+}
+
+d3.select("#select_sim").on("change", function(){
+	resetSim()	
+	readdrop()
+	console.log(simSelected)
+
+})
+
+function resetSim(){
+	node.remove()
+	edges.remove()
+	delete(s_A)
+	delete(s_kVA)
+	delete(s_kW)
+	runsim()
+}
 
 //This section controls the slider on the page which shows the date selected.
 	var sim_slider = document.getElementById("sim_dateslide")
@@ -35,12 +66,14 @@ var simSelected = s_A
 		layout.force("collisions").radius(function(simSelected) {
 			var read = simSelected.reading[current2]
 			if(read == "NA") {return 1}
-			return read/50}) 
+			return read/100}) 
 		layout.force("link").distance(function(d) {
 			var reader = simSelected[d.target.index].reading[current2]
 			if (reader == "NA") {return 1}
-			return reader/50}) 
+			console.log(reader)
+			return reader/100})
 		ticked()
+
 		
 	sim_output.innerHTML = sim_datee
 
@@ -52,12 +85,12 @@ var simSelected = s_A
 		.force('collisions', d3.forceCollide(function(simSelected) {
 			var read = simSelected.reading[sim_slider.value]
 			if(read == "NA") {return 1}
-			return read/50}))
+			return read/100}))
 		.force('many', d3.forceManyBody())
 		.force('link', d3.forceLink(slink).distance(function(d) {
 			read = simSelected[d.target.index].reading[sim_slider.value]
 			if (read == "NA") {return 1}
-			return read/50})) 
+			return read/100})) 
 		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 
@@ -124,3 +157,5 @@ var simSelected = s_A
 		}) 
 	})
 }) 
+
+}

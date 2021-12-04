@@ -4,11 +4,11 @@ d3.json("example_kVA.json").then(function(e_kVA) {
 	d3.json("example_kW.json").then(function(e_kW) { 
 		d3.json("example_links.json").then(function(e_links) {
 			
-			console.log(e_links)
+
 
 //Set the size and select the svg.
-var width = 500
-var height= 250
+var width = 600
+var height= 400
 var e_svg2 =  d3.select("#example_viz2")
 	.style("width", width)
 	.style("height", height)
@@ -38,8 +38,65 @@ var link_e = Array.from(e_links)
                 .data(e_kW)
                 .enter()
                 .append("circle") 
-			    .attr("fill", "black")
-				.attr("r", "10")
+			    .attr("fill", "red")
+				.attr("r", "5")
+				.on('mouseover', function(d, i){
+					d3.select(this).attr("stroke", "black")
+					    var text = e_svg2
+							.append('text')
+							.attr("id", 'nodetexta')
+							.attr("x", 0)
+							.attr("y", 200)
+							.attr("dx", ".35em")
+							.attr("dy", "0em")
+							.attr("font-family", "sans-serif")
+							.text("This node represents a bus in the real world power grid.")
+              
+						var text2 = e_svg2 
+							.append('text')
+							.attr("id", 'nodetextb')
+							.attr("x", 0)
+							.attr("y", 200)
+							.attr("dx", ".35em")
+							.attr("dy", "1.2em")
+							.attr("font-family", "sans-serif")
+							.text("Busses are where readings, like watts, volts, and amperes are recorded.")
+
+						var text3 = e_svg2 
+							.append('text')
+							.attr("id", 'nodetextc')
+							.attr("x", 0)
+							.attr("y", 200)
+							.attr("dx", ".35em")
+							.attr("dy", "2.4em")
+							.attr("font-family", "sans-serif")
+							.text("If you want more details from a node, you can check here.")
+				})
+				.on('mouseout', function(d,i){
+					d3.select(this).attr("stroke","none")
+					d3.select("#nodetexta").remove()
+					d3.select("#nodetextb").remove()
+					d3.select("#nodetextc").remove()
+				})
+	var text = e_svg2
+				.append('text')
+				.attr("id", 'dropdowntext')
+				.attr("x", 50)
+				.attr("y", 25)
+				.attr("dx", ".35em")
+				.attr("dy", "0em")
+				.attr("font-family", "sans-serif")
+				.text("No Added Weight" )
+/*	var text2 = svg 
+				.append('text')
+				.attr("id", 'nodetext2')
+				.attr("x", 50)
+				.attr("y", 950)
+				.attr("dx", ".35em")
+				.attr("dy", "1.2em")
+				.attr("font-family", "sans-serif")
+				.text("Reading: " + i.reading[slider.value])
+				*/
 
     function ticked(){
       node

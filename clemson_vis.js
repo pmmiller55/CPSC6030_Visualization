@@ -11,8 +11,8 @@ d3.json("clemson_A.json").then(function(A) {
 
 
 //Set the size and select the svg.
-var width = 1000
-var height= 1000
+var width = 500
+var height= 500
 var svg =  d3.select("#clemson_viz")
 	.style("width", width)
 	.style("height", height)
@@ -39,18 +39,20 @@ var cSelected = kW_data
 //This function pulls the value from the slider and updates the visualization with the new readings and shows what date you've selected on the website
 	slider.oninput = function() {
 		var current = this.value
+		console.log(current)
 		let datee = JSON.stringify(timA[current])
+		console.log(datee)
 		layout.force("collisions").radius(function(cSelected) {
 			var read = cSelected.reading[current]
 			if(read == "NA") {return 1}
-			return read/50}) 
+			return read/100}) 
 		layout.force("link").distance(function(d) {
 			var reader = cSelected[d.target.index].reading[current]
 			if (reader == "NA") {return 1}
-			return reader/50})  
+			return reader/100})  
 		ticked()
 		
-	output.innerHTML = datee
+	output.innerHTML = JSON.stringify(timA[slider.value])
 
 	}
 	
@@ -61,12 +63,12 @@ var cSelected = kW_data
 		.force('collisions', d3.forceCollide(function(cSelected) {
 			var read = cSelected.reading[slider.value]
 			if(read == "NA") {return 1}
-			return read/50}))
+			return read/100}))
 		.force('many', d3.forceManyBody())
-		.force('link', d3.forceLink(link)) /*.distance(function(d) {
-			read = cSelected[d.target].reading[slider.value]
+		.force('link', d3.forceLink(link).distance(function(d) {
+			read = cSelected[d.target.index].reading[slider.value]
 			if (read == "NA") {return 1}
-			return read/50})) */
+			return read/100})) 
 		.on('tick', ticked)
 
 //Set color scale; needs to be change to grab the max and min values instead of these testing values	 
