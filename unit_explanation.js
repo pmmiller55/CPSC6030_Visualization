@@ -17,23 +17,23 @@ var s1 = document.getElementById("voltslide");
 var s2 = document.getElementById("ampslide");
 var s3 = document.getElementById("vaslide");
 
-var slider1 = s1.value;
-var slider2 = s2.value;
+var voltslide = s1.value;
+var ampslide = s2.value;
 var slider3 = s3.value;
 
-var r = slider1/slider2;
-var rp = slider1*slider2;
+var r = voltslide/ampslide;
+var rp = voltslide*ampslide;
 
 
 var sample = [
     {
       Unit: 'Voltage (V)',
-      amount: slider1,
+      amount: voltslide,
       color: '#ff0000'
     },
     {
       Unit: 'Current (A)',
-      amount: slider2,
+      amount: ampslide,
       color: '#002aff'
     },
     {
@@ -52,6 +52,8 @@ var sample = [
       color: '#00ff26'
     }
   ];
+
+
 
 
 var svg = d3.select("#unit")
@@ -87,11 +89,77 @@ var svg = d3.select("#unit")
     var yAxis = svg.append("g")
                        .call(yAxisgen)
                        .style("transform", `translateX(${dimensions.margin.left}px)`)
-    bars = svg.selectAll(".bar")
-                    .data(sample)
-                    .enter()
-                    .select('rect')
-                    .attr("height", d => dimensions.height - dimensions.margin.bottom - yScale(d.amount))
+   
+  d3.select("input[type = range]#voltslide").on("input", function(){
+    voltslide = this.value;
+    d3.select("output#voltslide").text(voltslide);
+    r = voltslide/ampslide
+    rp = ampslide*voltslide
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Resistance (R)'})
+      .attr("y", yScale(r))
+      .attr("height", dimensions.height - yScale(r)-dimensions.margin.bottom);
+
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Real Power (W)'})
+      .attr("y", yScale(rp))
+      .attr("height", dimensions.height-yScale(rp)-dimensions.margin.bottom);
+  
+    return (
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Voltage (V)'})
+      .attr("y", yScale(voltslide))
+      .attr("height", dimensions.height - yScale(voltslide)-dimensions.margin.bottom));
+  })
+  d3.select("input[type = range]#ampslide").on("input", function(){
+    var ampslide;
+    ampslide = this.value;
+    //console.log(ampslide)
+    d3.select("output#ampslide").text(ampslide);
+    if(ampslide == 0){
+      r = 0;
+    }
+    else{
+      r = voltslide/ampslide;
+    }
+    rp = ampslide*voltslide;
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Resistance (Ohms)'})
+      .attr("y", yScale(r))
+      .attr("height", dimensions.height - yScale(r)-dimensions.margin.bottom);
+
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Real Power (W)'})
+      .attr("y", yScale(rp))
+      .attr("height", dimensions.height-yScale(rp)-dimensions.margin.bottom);
+  
+    return (
+    d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Current (A)'})
+      .attr("y", yScale(ampslide))
+      .attr("height", dimensions.height-yScale(ampslide)-dimensions.margin.bottom));
+  })
+  d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Resistance (R)'})
+      .attr("y", yScale(r))
+      .attr("height", dimensions.height - yScale(r)-dimensions.margin.bottom);
+
+  d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Real Power (W)'})
+      .attr("y", yScale(rp))
+      .attr("height", dimensions.height-yScale(rp)-dimensions.margin.bottom);
+  
+  d3.select("input[type = range]#vaslide").on("input", function(){
+    var vaslide;
+    vaslide = this.value;
+    //console.log(vaslide)
+    d3.select("output#vaslide").text(vaslide);
+    return (
+      d3.selectAll(".bar")
+      .filter(function(d){return d.Unit == 'Apparent Power (VA)'})
+      .attr("y", yScale(vaslide))
+      .attr("height", dimensions.height-yScale(vaslide)-dimensions.margin.bottom));
+  })
 
 
 

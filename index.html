@@ -104,15 +104,21 @@ node graph can summarize nodes and remove links to simplify the visualization wh
 
 <p>Voltage Slider:</p>
 <input class ="slider" id="voltslide" type="range" min="0" max="50" value="50">
-<p> Voltage: <span id="voltslide"></span></p>
+<p> Voltage:
+<output id = "voltslide"> 50</output>
+Volts</p>
 
 <p>Current Slider:</p>
 <input class ="slider" id="ampslide" type="range" min="0" max="10" value="10">
-<p> Current: <span id="ampslide"></span></p>
+<p> Current: 
+<output id = "ampslide"> 10</output>
+Amps</p>
 
 <p>Apparent Power Slider:</p>
 <input class ="slider" id="vaslide" type="range" min="0" max="500" value="500">
-<p> Apparent Power: <span id="vaslide"></span></p>
+<p> Apparent Power:
+<output id = "vaslide"> 500</output>
+Volt-Amps</p>
 
 <svg id ='unit'></svg>
 <script src="unit_explanation.js" type="text/javascript"></script>
