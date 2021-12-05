@@ -1,4 +1,10 @@
 
+run_clem()
+
+function run_clem() {
+	
+
+
 //Load in the datasets
 d3.json("clemson_A.json").then(function(A) { 
 	d3.csv("timeA.csv").then(function(timeA) { 
@@ -28,9 +34,16 @@ var A_data = A
 var kW_data = kW
 var kVA_data = kVA
 
-var cSelected = kW_data
+var cSelected = readclem()
 
-
+	function resetClem(){
+	node.remove()
+	edges.remove()
+	delete(A)
+	delete(kVA)
+	delete(kW)
+	run_clem()
+}
 //This section controls the slider on the page which shows the date selected.
 	var slider = document.getElementById("dateslide")
  	var output = document.getElementById("date")
@@ -42,20 +55,38 @@ var cSelected = kW_data
 		console.log(current)
 		let datee = JSON.stringify(timA[current])
 		console.log(datee)
-		layout.force("collisions").radius(function(cSelected) {
-			var read = cSelected.reading[current]
+		layout.force("collisions").radius(function(d) {
+			console.log(d)
+			var read = d.reading //var read = cSelected.reading[current]		
 			if(read == "NA") {return 1}
 			return read/100}) 
+			//console.log(read)
 		layout.force("link").distance(function(d) {
 			var reader = cSelected[d.target.index].reading[current]
-			if (reader == "NA") {return 1}
-			return reader/100})  
+			if (reader == "NA") {return 1}				
+			return reader/100})
+
 		ticked()
 		
 	output.innerHTML = JSON.stringify(timA[slider.value])
 
 	}
 	
+	function readclem(){
+	var get = document.getElementById("select_clem").value
+	if (get == "A_data") {var clemSelected1 = A}
+	if (get == "kVA_data") {var clemSelected1 = kVA}
+	if (get == "kW_data") {var clemSelected1 = kW}
+	return clemSelected1
+}
+
+d3.select("#select_clem").on("change", function(){
+	resetClem()	
+	readclem()
+	console.log(cSelected)
+
+})
+
 	
 //Forces
     var layout = d3.forceSimulation(cSelected)
@@ -139,3 +170,4 @@ var cSelected = kW_data
 		}) 
 	})
 }) 
+}

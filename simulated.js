@@ -72,7 +72,8 @@ function resetSim(){
 			if (reader == "NA") {return 1}
 			console.log(reader)
 			return reader/100})
-		ticked()
+		layout.force('tick')
+		
 
 		
 	sim_output.innerHTML = sim_datee
