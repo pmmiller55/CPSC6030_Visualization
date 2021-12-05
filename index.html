@@ -24,6 +24,7 @@ h2 {font-weight: 200 ;
 .slider {
   width: 50%;}
 .slider_example { width: 15%}
+.slider_unit { width: 35%}
 
 </style>
 
@@ -103,22 +104,21 @@ node graph can summarize nodes and remove links to simplify the visualization wh
 <b>Volt-Ampere (VA):</b> V * A, represents <u>apparent power</u>. In contrast, Watts are <u>real power.</u><br>
 
 <p>Voltage Slider:</p>
-<input class ="slider" id="voltslide" type="range" min="0" max="50" value="50">
+<input class ="slider_unit" id="voltslide" type="range" min="0" max="50" value="50"  width="90%">
 <p> Voltage:
 <output id = "voltslide"> 50</output>
 Volts</p>
 
 <p>Current Slider:</p>
-<input class ="slider" id="ampslide" type="range" min="0" max="10" value="10">
+<input class ="slider_unit" id="ampslide" type="range" min="0" max="10" value="10"  width="100%">
 <p> Current: 
 <output id = "ampslide"> 10</output>
 Amps</p>
 
 <p>Apparent Power Slider:</p>
-<input class ="slider" id="vaslide" type="range" min="0" max="500" value="500">
+<input class ="slider_unit" id="vaslide" type="range" min="0" max="500" value="500"  width="100%">
 <p> Apparent Power:
-<output id = "vaslide"> 500</output>
-Volt-Amps</p>
+<output id = "vaslide"> 500</output></p>
 
 <svg id ='unit'></svg>
 <script src="unit_explanation.js" type="text/javascript"></script>

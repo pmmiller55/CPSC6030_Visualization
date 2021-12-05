@@ -96,7 +96,7 @@ var svg = d3.select("#unit")
     r = voltslide/ampslide
     rp = ampslide*voltslide
     d3.selectAll(".bar")
-      .filter(function(d){return d.Unit == 'Resistance (R)'})
+      .filter(function(d){return d.Unit == 'Resistance (Ohms)'})
       .attr("y", yScale(r))
       .attr("height", dimensions.height - yScale(r)-dimensions.margin.bottom);
 
@@ -152,8 +152,9 @@ var svg = d3.select("#unit")
   d3.select("input[type = range]#vaslide").on("input", function(){
     var vaslide;
     vaslide = this.value;
+    var eff = vaslide*100/rp
     //console.log(vaslide)
-    d3.select("output#vaslide").text(vaslide);
+    d3.select("output#vaslide").text(vaslide + " Volt-Amps and the system is " + eff + "% efficient.");
     return (
       d3.selectAll(".bar")
       .filter(function(d){return d.Unit == 'Apparent Power (VA)'})
