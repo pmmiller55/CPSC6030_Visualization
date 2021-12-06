@@ -74,6 +74,115 @@ var svg = d3.select("#unit")
                     .attr("width", xScale.bandwidth())
                     .attr("height", d => dimensions.height - dimensions.margin.bottom - yScale(d.amount))
                     .attr("fill", function(d) { return d.color; })
+					.on('mouseover', function(){
+						d3.select(this).attr("stroke", "black")
+					    var text22 = defsvg
+							.append('text')
+							.attr("id", 'deftext')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "0em")
+							.attr("font-family", "sans-serif")	
+						var val = d3.select(this).attr('x')
+						if (val == 330) {
+							text22.text("Volt-Ampere (VA): V * A, represents apparent power.")
+							
+							var text23 = defsvg
+							.append('text')
+							.attr("id", 'deftext2')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "1em")
+							.attr("font-family", "sans-serif")
+							.text("In contrast, Watts are real power.")}
+							
+						if (val == 260) {
+							text22.text("Watt (W): The amount of power/electricity consumed.")
+							
+							var text23 = defsvg
+							.append('text')
+							.attr("id", 'deftext2')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "1em")
+							.attr("font-family", "sans-serif")
+							.text("A higher watt value will indicate more power being used.")}
+
+						if (val == 50) {
+							text22.text("Volts (V): Difference of potential that drives")
+							
+							var text23 = defsvg
+							.append('text')
+							.attr("id", 'deftext2')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "1em")
+							.attr("font-family", "sans-serif")
+							.text("the current against the resistance.")	
+							var text24 = defsvg
+							.append('text')
+							.attr("id", 'deftext3')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "2em")
+							.attr("font-family", "sans-serif")
+							.text("If it were water, it would be the water pressure.")}	
+
+						if (val == 190) {
+							text22.text("Resistance is a measurement of the")
+							
+							var text23 = defsvg
+							.append('text')
+							.attr("id", 'deftext2')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "1em")
+							.attr("font-family", "sans-serif")
+							.text("opposition to current seen in a circuit.")
+							var text24 = defsvg
+							.append('text')
+							.attr("id", 'deftext3')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "2em")
+							.attr("font-family", "sans-serif")
+							.text("If it were water, it would be the narrowing of the pipe.")}	
+
+						if (val == 120) {
+							text22.text("Resistance is a measurement of the")
+							
+							var text23 = defsvg
+							.append('text')
+							.attr("id", 'deftext2')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "1em")
+							.attr("font-family", "sans-serif")
+							.text("The intensity of an electrical current.")
+							var text24 = defsvg
+							.append('text')
+							.attr("id", 'deftext3')
+							.attr("x", 10)
+							.attr("y", 150)
+							.attr("dx", ".35em")
+							.attr("dy", "2em")
+							.attr("font-family", "sans-serif")
+							.text("If it were water it would be the amount of water flowing.")}								
+					})
+					.on('mouseout', function(){
+						d3.select(this).attr("stroke","none")
+						d3.select("#deftext").remove()
+						d3.select("#deftext2").remove()
+						d3.select("#deftext3").remove()
+					})
     var xAxisgen = d3.axisBottom().scale(xScale)
     var yAxisgen = d3.axisLeft().scale(yScale)
     var xAxis = svg.append("g")
@@ -93,5 +202,5 @@ var svg = d3.select("#unit")
                     .select('rect')
                     .attr("height", d => dimensions.height - dimensions.margin.bottom - yScale(d.amount))
 
-
+var defsvg = d3.select("#definitions")
 
